@@ -16,7 +16,7 @@
   <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Your Title Here</title>
+  <title>Predicting Hypertension Using Health Checkup Data</title>
   <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="static/css/bulma.min.css">
@@ -40,10 +40,10 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">Your Title Here</h1>
+            <h1 class="title is-1 publication-title">Predicting Hypertension Using Health Checkup Data</h1>
             <div class="is-size-5 publication-authors">
               <span class="author-block">
-                <a href="https://sites.google.com/view/bdsl-yonsei" target="_blank">Your Name</a>
+                <a href="https://sites.google.com/view/bdsl-yonsei" target="_blank">Si-Hoon Yeom</a>
                 <sup>1</sup>,
               </span>
             </div>
@@ -53,7 +53,7 @@
             <div class="column has-text-centered">
               <div class="publication-links">
                 <span class="link-block">
-                  <a href="https://github.com/shinyflight/ProjectPage" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                  <a href="https://github.com/si-hoon010/Healthcare-Application_SW_Final_Project" target="_blank" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fab fa-github"></i>
                     </span>
@@ -91,7 +91,7 @@
           <img src="static/images/carousel1.jpg" alt="MY ALT TEXT"/>
           <div class="content has-text-justified">
             <p>
-              본 프로젝트에서는 Keras를 사용한 딥러닝 모델을 개발하였으며, ADAM 옵티마이저를 사용하여 고혈압 여부를 예측했습니다. 주요 데이터 전처리 과정에는 결측값 처리, 불필요한 열 제거, 데이터 스케일링이 포함되며, 모델의 성능은 F1 스코어와 혼동 행렬, ROC 곡선을 통해 평가하였습니다.
+              본 프로젝트에서는 XGBoost를 사용하여 고혈압 여부를 예측하는 모델을 개발하였습니다. 데이터 전처리 과정에는 결측값 처리, 불필요한 열 제거, 데이터 스케일링이 포함되었습니다. 모델의 성능을 평가하기 위해 GridSearchCV를 사용하여 최적의 하이퍼파라미터를 찾았습니다.
             </p>
           </div>
         </div>
@@ -106,11 +106,47 @@
           <h2 class="title is-3">Experimental Results</h2>
           <div class="content has-text-justified">
             <p>
-              실험 결과, 모델의 정확도는 약 83%였으며, F1 스코어는 0.00으로 나타났습니다. 이는 모델이 고혈압 여부를 예측하는 데 있어 어려움을 겪고 있음을 의미합니다. 데이터 불균형 문제를 해결하기 위해 클래스 가중치를 적용했지만, 여전히 모델의 성능을 개선하기 위한 추가적인 조치가 필요함을 시사합니다.
+              실험 결과, 모델의 정확도는 약 79%였으며, F1 스코어는 0.62로 나타났습니다. 데이터 불균형 문제를 해결하기 위해 언더샘플링을 적용하였으며, 모델의 성능을 향상시키기 위해 다양한 하이퍼파라미터 조합을 실험했습니다. 최적의 하이퍼파라미터는 {'colsample_bytree': 0.7, 'learning_rate': 0.001, 'max_depth': 3, 'n_estimators': 100, 'subsample': 0.7}로 설정되었습니다.
             </p>
+            <p>
+              고혈압 여부 갯수:
+              <br>고혈압여부
+              <br>0    288019
+              <br>1     57492
+              <br>Name: count, dtype: int64
+            </p>
+            <p>
+              모델의 최종 성능 지표는 다음과 같습니다:
+              <br>XGBoost Best F1 Score: 0.62
+              <br>XGBoost Weighted F1 Score: 0.82
+              <br>Best Hyperparameters: {'colsample_bytree': 0.7, 'learning_rate': 0.001, 'max_depth': 3, 'n_estimators': 100, 'subsample': 0.7}
+            </p>
+            <pre>
+              precision    recall  f1-score   support
+              0       1.00      0.75      0.86     57604
+              1       0.45      1.00      0.62     11499
+              accuracy                           0.79     69103
+              macro avg       0.72      0.88      0.74     69103
+              weighted avg    0.91      0.79      0.82     69103
+            </pre>
           </div>
-          <div class="publication-video">
-            <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section hero is-light">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Conclusion</h2>
+          <div class="content has-text-justified">
+            <p>
+              본 연구에서는 XGBoost를 활용하여 건강검진 데이터를 기반으로 고혈압 여부를 예측하는 모델을 개발하였습니다. 데이터 전처리 과정에서 언더샘플링을 통해 클래스 불균형 문제를 해결하고, GridSearchCV를 활용하여 최적의 하이퍼파라미터를 찾았습니다. 최종 모델은 높은 Recall을 보였으나, Precision에서 개선의 여지가 있음을 확인하였습니다. 이는 실제 의료 현장에서 고혈압 예측 모델을 사용할 때, 고혈압으로 잘못 예측된 환자에 대한 추가적인 검진과 관리가 필요함을 시사합니다.
+            </p>
+            <p>
+              본 연구는 고혈압 예측 모델의 성능을 높이기 위한 첫 걸음으로, 앞으로 더 많은 데이터와 다양한 모델을 활용한 추가 연구가 필요합니다. 이를 통해 더욱 정확하고 신뢰성 있는 고혈압 예측 모델을 개발할 수 있을 것입니다.
+            </p>
           </div>
         </div>
       </div>
